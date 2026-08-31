@@ -72,7 +72,7 @@ export function TaskForm({ initial, defaultProjectId, onSubmit, onCancel, submit
         {titleError && <p className="text-xs text-destructive">{titleError}</p>}
       </div>
 
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div className="space-y-1.5">
           <Label htmlFor="dueDate">Due date</Label>
           <Input id="dueDate" type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
@@ -91,7 +91,7 @@ export function TaskForm({ initial, defaultProjectId, onSubmit, onCancel, submit
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div className="space-y-1.5">
           <Label htmlFor="status">Status</Label>
           <Select value={status} onValueChange={(v) => setStatus(v as Status)}>

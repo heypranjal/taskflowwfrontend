@@ -90,15 +90,15 @@ export function TimelinePage() {
         }
       />
 
-      {/* Tabs */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border">
-        <div className="flex flex-wrap items-center gap-1">
+      {/* Tabs — horizontally scrollable on mobile */}
+      <div className="border-b border-border">
+        <div className="flex items-center gap-1 overflow-x-auto no-scrollbar -mx-1 px-1">
           {TABS.map(({ label, icon: Icon }) => (
             <button
               key={label}
               onClick={() => setTab(label)}
               className={cn(
-                'inline-flex items-center gap-2 border-b-2 px-3 py-2.5 text-sm font-medium transition-colors',
+                'inline-flex shrink-0 items-center gap-2 border-b-2 px-3 py-2.5 text-sm font-medium transition-colors',
                 tab === label
                   ? 'border-foreground text-foreground'
                   : 'border-transparent text-muted-foreground hover:text-foreground',
@@ -108,7 +108,11 @@ export function TimelinePage() {
             </button>
           ))}
         </div>
-        <div className="relative w-full sm:w-72">
+      </div>
+
+      {/* Search */}
+      <div className="mt-4">
+        <div className="relative w-full sm:max-w-sm">
           <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             placeholder="Search…"
@@ -120,19 +124,19 @@ export function TimelinePage() {
       </div>
 
       {/* Calendar controls */}
-      <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
+      <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
         <div className="flex items-center gap-3">
-          <h2 className="text-xl font-semibold tracking-tight">{format(startDate, 'MMMM yyyy')}</h2>
+          <h2 className="text-lg sm:text-xl font-semibold tracking-tight">{format(startDate, 'MMMM yyyy')}</h2>
           <Button variant="outline" size="sm" onClick={() => setOffset(0)}>Today</Button>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <div className="inline-flex items-center rounded-full border border-border bg-card p-0.5 text-xs">
             {(['Day', 'Week', 'Month'] as View[]).map((v) => (
               <button
                 key={v}
                 onClick={() => setView(v)}
                 className={cn(
-                  'px-4 py-1.5 rounded-full transition-colors',
+                  'px-3 sm:px-4 py-1.5 rounded-full transition-colors',
                   view === v ? 'bg-foreground text-background' : 'text-muted-foreground hover:text-foreground',
                 )}
               >
@@ -140,10 +144,10 @@ export function TimelinePage() {
               </button>
             ))}
           </div>
-          <div className="inline-flex items-center rounded-full border border-border bg-card px-3 py-1.5 text-xs text-muted-foreground">
+          <div className="hidden sm:inline-flex items-center rounded-full border border-border bg-card px-3 py-1.5 text-xs text-muted-foreground">
             <CalendarDays className="mr-2 h-3.5 w-3.5" /> {rangeLabel}
           </div>
-          <div className="inline-flex items-center gap-1">
+          <div className="inline-flex items-center gap-1 ml-auto sm:ml-0">
             <Button
               variant="outline"
               size="icon"
@@ -164,6 +168,7 @@ export function TimelinePage() {
             </Button>
           </div>
         </div>
+        <p className="sm:hidden text-xs text-muted-foreground">{rangeLabel}</p>
       </div>
 
       {/* Grid */}

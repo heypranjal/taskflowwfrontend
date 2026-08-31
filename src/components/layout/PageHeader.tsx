@@ -28,7 +28,7 @@ export function PageHeader({ crumbs, title, subtitle, actions }: Props) {
             ))}
           </nav>
         )}
-        <h1 className="text-3xl font-semibold tracking-tight">{title}</h1>
+        <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight">{title}</h1>
         {subtitle && <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p>}
       </div>
       {actions && <div className="flex flex-wrap items-center gap-2 shrink-0">{actions}</div>}

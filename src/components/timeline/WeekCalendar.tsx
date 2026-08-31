@@ -29,60 +29,93 @@ export function WeekCalendar({ tasks, startDate, days = 7, onSelectTask }: Props
   }, [tasks, startDate, days])
 
   return (
-    <div className="overflow-x-auto">
-      <div
-        className="grid min-w-[840px] rounded-xl border border-border bg-card"
-        style={{ gridTemplateColumns: `repeat(${days}, minmax(0, 1fr))` }}
-      >
-        {/* Day headers */}
-        {columns.map(({ date, iso }) => {
+    <>
+      {/* Mobile: vertical stacked list per day */}
+      <div className="sm:hidden space-y-4">
+        {columns.map(({ date, iso, tasks: dayTasks }) => {
           const isToday = isSameDay(date, today)
           return (
-            <div
-              key={`h-${iso}`}
-              className={cn(
-                'border-b border-border p-3 text-center',
-                isToday && 'bg-foreground/[0.03]',
+            <div key={iso} className="rounded-xl border border-border bg-card p-3">
+              <div className="flex items-center gap-3 border-b border-border pb-2 mb-3">
+                <span
+                  className={cn(
+                    'inline-flex h-9 w-9 items-center justify-center rounded-full text-sm font-semibold',
+                    isToday ? 'bg-foreground text-background' : 'bg-muted text-foreground',
+                  )}
+                >
+                  {format(date, 'd')}
+                </span>
+                <div>
+                  <p className="text-sm font-semibold">{format(date, 'EEEE')}</p>
+                  <p className="text-xs text-muted-foreground">{format(date, 'MMMM yyyy')}</p>
+                </div>
+                <span className="ml-auto text-xs text-muted-foreground">{dayTasks.length} task{dayTasks.length === 1 ? '' : 's'}</span>
+              </div>
+              {dayTasks.length === 0 ? (
+                <p className="py-2 text-xs text-muted-foreground text-center">Nothing scheduled.</p>
+              ) : (
+                <div className="space-y-2">
+                  {dayTasks.map((t) => (
+                    <EventCard key={t.id} task={t} onClick={() => onSelectTask(t)} />
+                  ))}
+                </div>
               )}
-            >
-              <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                {format(date, 'EEE')}
-              </p>
-              <p
-                className={cn(
-                  'mt-1 inline-flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold',
-                  isToday ? 'bg-foreground text-background' : 'text-foreground',
-                )}
-              >
-                {format(date, 'd')}
-              </p>
-            </div>
-          )
-        })}
-
-        {/* Day columns */}
-        {columns.map(({ date, iso, tasks: dayTasks }, idx) => {
-          const isToday = isSameDay(date, today)
-          return (
-            <div
-              key={`c-${iso}`}
-              className={cn(
-                'min-h-[420px] space-y-2 p-2',
-                idx > 0 && 'border-l border-border',
-                isToday && 'bg-foreground/[0.02]',
-              )}
-            >
-              {dayTasks.length === 0 && (
-                <div className="h-full min-h-[80px] rounded-md border border-dashed border-border/60" aria-hidden />
-              )}
-              {dayTasks.map((t) => (
-                <EventCard key={t.id} task={t} onClick={() => onSelectTask(t)} />
-              ))}
             </div>
           )
         })}
       </div>
-    </div>
+
+      {/* ≥sm: horizontal calendar grid */}
+      <div className="hidden sm:block overflow-x-auto">
+        <div
+          className="grid min-w-[720px] rounded-xl border border-border bg-card"
+          style={{ gridTemplateColumns: `repeat(${days}, minmax(0, 1fr))` }}
+        >
+          {columns.map(({ date, iso }) => {
+            const isToday = isSameDay(date, today)
+            return (
+              <div
+                key={`h-${iso}`}
+                className={cn('border-b border-border p-3 text-center', isToday && 'bg-foreground/[0.03]')}
+              >
+                <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                  {format(date, 'EEE')}
+                </p>
+                <p
+                  className={cn(
+                    'mt-1 inline-flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold',
+                    isToday ? 'bg-foreground text-background' : 'text-foreground',
+                  )}
+                >
+                  {format(date, 'd')}
+                </p>
+              </div>
+            )
+          })}
+
+          {columns.map(({ date, iso, tasks: dayTasks }, idx) => {
+            const isToday = isSameDay(date, today)
+            return (
+              <div
+                key={`c-${iso}`}
+                className={cn(
+                  'min-h-[380px] space-y-2 p-2',
+                  idx > 0 && 'border-l border-border',
+                  isToday && 'bg-foreground/[0.02]',
+                )}
+              >
+                {dayTasks.length === 0 && (
+                  <div className="h-full min-h-[80px] rounded-md border border-dashed border-border/60" aria-hidden />
+                )}
+                {dayTasks.map((t) => (
+                  <EventCard key={t.id} task={t} onClick={() => onSelectTask(t)} />
+                ))}
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    </>
   )
 }
 

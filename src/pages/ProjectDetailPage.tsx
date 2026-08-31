@@ -58,14 +58,14 @@ export function ProjectDetailPage() {
                 <span>{projectQ.data.completedTaskCount} completed</span>
               </div>
             </div>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               <Button variant="outline" size="sm" onClick={() => setEditOpen(true)}>
                 <Pencil className="h-4 w-4" /> Edit
               </Button>
               <Button variant="outline" size="sm" onClick={() => setConfirmOpen(true)}>
                 <Trash2 className="h-4 w-4" /> Delete
               </Button>
-              <Button onClick={() => setModalOpen(true)}>
+              <Button size="sm" onClick={() => setModalOpen(true)}>
                 <Plus className="h-4 w-4" /> Add task
               </Button>
             </div>
