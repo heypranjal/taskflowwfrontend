@@ -6,7 +6,6 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useAuth } from '@/lib/auth'
 import { useToast } from '@/components/ui/toast'
-import { BackgroundLayer } from '@/components/common/BackgroundLayer'
 import { Glass } from '@/components/common/Glass'
 
 type Mode = 'signin' | 'signup' | 'magic'
@@ -68,7 +67,6 @@ export function LoginPage() {
 
   return (
     <div className="relative flex min-h-screen items-center justify-center bg-background px-4 py-10 overflow-hidden">
-      <BackgroundLayer />
       <Glass glare className="relative z-10 w-full max-w-sm rounded-[28px] p-6">
         <div className="mb-8 flex items-center gap-2">
           <div className="flex h-9 w-9 items-center justify-center rounded-md bg-foreground text-background text-sm font-bold">
