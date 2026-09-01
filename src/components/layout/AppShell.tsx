@@ -7,7 +7,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   return (
     <div className="relative flex min-h-screen bg-background">
       {/* Photo background — light mode only; dims to bg-background in dark. */}
-      <LightImageBackground scrim={0.55} />
+      <LightImageBackground scrim={0} />
 
       <div className="relative z-10 flex w-full">
         <Sidebar />
