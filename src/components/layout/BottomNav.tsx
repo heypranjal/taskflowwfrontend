@@ -12,7 +12,7 @@ const items = [
 export function BottomNav() {
   return (
     <nav
-      className="md:hidden fixed bottom-0 inset-x-0 z-40 border-t border-border bg-card/95 backdrop-blur"
+      className="md:hidden fixed bottom-0 inset-x-0 z-40 border-t border-white/20 bg-white/40 dark:bg-card/95 dark:border-border"
       style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
     >
       <div className="grid grid-cols-4">

@@ -5,7 +5,7 @@ import type { LiquidGlassOptions } from '@/lib/liquid-glass'
 
 type GlassProps = HTMLAttributes<HTMLDivElement> & {
   as?: ElementType
-  /** Enable the real SVG-refraction effect (Chromium-only; other browsers get frosted blur). */
+  /** Enable the real SVG-refraction / backdrop-blur effect (off by default so the background photo stays crisp). */
   refract?: boolean
   /** Enable cursor-tracked highlight sheen. */
   glare?: boolean
@@ -13,7 +13,7 @@ type GlassProps = HTMLAttributes<HTMLDivElement> & {
 }
 
 export const Glass = forwardRef<HTMLDivElement, GlassProps>(function Glass(
-  { as, refract = true, glare = false, glassOptions, className, onPointerMove, ...rest },
+  { as, refract = false, glare = false, glassOptions, className, onPointerMove, ...rest },
   forwardedRef,
 ) {
   const Component = (as ?? 'div') as ElementType

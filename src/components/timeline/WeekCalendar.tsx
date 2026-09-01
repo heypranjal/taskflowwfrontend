@@ -35,7 +35,7 @@ export function WeekCalendar({ tasks, startDate, days = 7, onSelectTask }: Props
         {columns.map(({ date, iso, tasks: dayTasks }) => {
           const isToday = isSameDay(date, today)
           return (
-            <div key={iso} className="rounded-xl border border-border bg-card p-3">
+            <div key={iso} className="glass rounded-xl p-3">
               <div className="flex items-center gap-3 border-b border-border pb-2 mb-3">
                 <span
                   className={cn(
@@ -68,7 +68,7 @@ export function WeekCalendar({ tasks, startDate, days = 7, onSelectTask }: Props
       {/* ≥sm: horizontal calendar grid */}
       <div className="hidden sm:block overflow-x-auto">
         <div
-          className="grid min-w-[720px] rounded-xl border border-border bg-card"
+          className="glass grid min-w-[720px] rounded-xl"
           style={{ gridTemplateColumns: `repeat(${days}, minmax(0, 1fr))` }}
         >
           {columns.map(({ date, iso }) => {

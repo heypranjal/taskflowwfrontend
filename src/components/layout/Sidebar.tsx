@@ -50,7 +50,7 @@ export function Sidebar() {
 
   return (
     <>
-      <aside className="hidden md:flex md:w-64 md:flex-col md:border-r md:border-border md:bg-card/60">
+      <aside className="hidden md:flex md:w-64 md:flex-col md:border-r md:border-white/20 md:bg-white/10 dark:md:bg-card/60 dark:md:border-border">
         {/* Workspace / user card */}
         <div className="px-3 pt-4">
           <div className="glass flex w-full items-center gap-3 rounded-[16px] p-2">
