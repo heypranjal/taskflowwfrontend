@@ -67,9 +67,8 @@ export function LoginPage() {
 
   return (
     <div className="relative flex min-h-screen items-center justify-center bg-background px-4 py-10 overflow-hidden">
-      <BackgroundLayer brightness={0.9} />
-      <div className="pointer-events-none absolute inset-0 z-[1] bg-background/40 backdrop-blur-[2px]" aria-hidden />
-      <div className="relative z-10 w-full max-w-sm rounded-2xl border border-border/60 bg-card/80 backdrop-blur-xl p-6 shadow-2xl">
+      <BackgroundLayer />
+      <div className="relative z-10 w-full max-w-sm rounded-2xl border border-border/40 bg-card/70 backdrop-blur-xl p-6 shadow-2xl">
         <div className="mb-8 flex items-center gap-2">
           <div className="flex h-9 w-9 items-center justify-center rounded-md bg-foreground text-background text-sm font-bold">
             MP

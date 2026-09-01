@@ -1,36 +1,32 @@
-import RecursiveErosionBackground from '@/components/ui/recursive-erosion'
+import NeonMesh from '@/components/ui/neon-mesh'
 import { useTheme } from '@/lib/theme'
 import { cn } from '@/lib/utils'
 
 interface Props {
-  /** Higher = brighter. Cap around 1. On busy pages set ~0.4 to keep content readable. */
-  brightness?: number
   /** Only render on medium+ screens (avoids GPU cost on phones). */
   desktopOnly?: boolean
+  /** Absorbs pointer events so the mesh reacts to mouse (default: false — passes clicks through). */
+  interactive?: boolean
   className?: string
 }
 
 /**
- * Fixed full-viewport particle-sphere background. Pointer-events off so it
- * never blocks clicks. Sits at z-index 0; put page content in a container
- * with `relative z-10` to layer above it.
+ * Fixed full-viewport 3D Verlet-cloth background. Sits at z-index 0;
+ * page content should live in a container with `relative z-10`.
  */
-export function BackgroundLayer({ brightness = 1, desktopOnly = false, className }: Props) {
+export function BackgroundLayer({ desktopOnly = false, interactive = false, className }: Props) {
   const { theme } = useTheme()
   return (
     <div
-      aria-hidden
+      aria-hidden={!interactive}
       className={cn(
-        'pointer-events-none fixed inset-0 z-0 overflow-hidden',
+        'fixed inset-0 z-0 overflow-hidden',
+        interactive ? 'pointer-events-auto' : 'pointer-events-none',
         desktopOnly && 'hidden md:block',
         className,
       )}
     >
-      <RecursiveErosionBackground
-        mode={theme}
-        brightness={brightness}
-        className="h-full w-full"
-      />
+      <NeonMesh mode={theme} showOverlay={false} className="h-full w-full" />
     </div>
   )
 }

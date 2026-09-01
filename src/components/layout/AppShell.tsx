@@ -6,12 +6,11 @@ import { BackgroundLayer } from '@/components/common/BackgroundLayer'
 export function AppShell({ children }: { children: ReactNode }) {
   return (
     <div className="relative flex min-h-screen bg-background overflow-hidden">
-      {/* Ambient particle background — desktop only to save mobile battery.
-          Dimmed so it never fights with UI content. */}
-      <BackgroundLayer desktopOnly brightness={0.42} />
-      {/* Soft veil to fade the effect into the page tone. */}
+      {/* Ambient 3D mesh — desktop only to keep mobile snappy. */}
+      <BackgroundLayer desktopOnly />
+      {/* Veil to soften the mesh under app content while keeping the glow visible. */}
       <div
-        className="pointer-events-none fixed inset-0 z-0 hidden md:block bg-background/55 backdrop-blur-[1px]"
+        className="pointer-events-none fixed inset-0 z-0 hidden md:block bg-background/70"
         aria-hidden
       />
 
