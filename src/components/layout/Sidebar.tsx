@@ -1,12 +1,13 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import {
-  Bell, Calendar, ChevronDown, LayoutDashboard, Moon, Plus,
+  Bell, Calendar, LayoutDashboard, LogOut, Moon, Plus,
   Search, Settings, ShieldCheck, Sun, X,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useProjects } from '@/hooks/useProjects'
 import { useTheme } from '@/lib/theme'
+import { useAuth } from '@/lib/auth'
 import { Button } from '@/components/ui/button'
 import { ProjectModal } from '@/components/projects/ProjectModal'
 
@@ -34,25 +35,41 @@ function itemCls(isActive: boolean) {
 export function Sidebar() {
   const projectsQ = useProjects()
   const { theme, toggle } = useTheme()
+  const { user, signOut } = useAuth()
   const nav = useNavigate()
   const [projectModal, setProjectModal] = useState(false)
   const [tipVisible, setTipVisible] = useState(true)
 
+  const email = user?.email ?? 'anonymous'
+  const initials = (email[0] ?? '?').toUpperCase()
+
+  async function handleSignOut() {
+    await signOut()
+    nav('/login', { replace: true })
+  }
+
   return (
     <>
       <aside className="hidden md:flex md:w-64 md:flex-col md:border-r md:border-border md:bg-card/60">
-        {/* Workspace card */}
+        {/* Workspace / user card */}
         <div className="px-3 pt-4">
-          <button className="flex w-full items-center gap-3 rounded-lg border border-border bg-background/60 p-2 text-left transition-colors hover:bg-background">
-            <div className="flex h-9 w-9 items-center justify-center rounded-md bg-foreground text-background text-sm font-bold">
-              MP
+          <div className="flex w-full items-center gap-3 rounded-lg border border-border bg-background/60 p-2">
+            <div className="flex h-9 w-9 items-center justify-center rounded-md bg-foreground text-background text-sm font-bold uppercase">
+              {initials}
             </div>
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-semibold">My Planner</p>
-              <p className="truncate text-xs text-muted-foreground">personal@planner.app</p>
+              <p className="truncate text-xs text-muted-foreground">{email}</p>
             </div>
-            <ChevronDown className="h-4 w-4 text-muted-foreground" />
-          </button>
+            <button
+              onClick={handleSignOut}
+              className="p-1 text-muted-foreground hover:text-foreground"
+              aria-label="Sign out"
+              title="Sign out"
+            >
+              <LogOut className="h-4 w-4" />
+            </button>
+          </div>
         </div>
 
         {/* MAIN MENU */}
