@@ -53,7 +53,7 @@ export function Sidebar() {
       <aside className="hidden md:flex md:w-64 md:flex-col md:border-r md:border-border md:bg-card/60">
         {/* Workspace / user card */}
         <div className="px-3 pt-4">
-          <div className="flex w-full items-center gap-3 rounded-lg border border-border bg-background/60 p-2">
+          <div className="glass flex w-full items-center gap-3 rounded-[16px] p-2">
             <div className="flex h-9 w-9 items-center justify-center rounded-md bg-foreground text-background text-sm font-bold uppercase">
               {initials}
             </div>
@@ -120,7 +120,7 @@ export function Sidebar() {
         {/* Tip / promo card + theme toggle */}
         <div className="p-3 space-y-2">
           {tipVisible && (
-            <div className="relative rounded-lg border border-border bg-background/60 p-3">
+            <div className="glass relative rounded-[16px] p-3">
               <button
                 onClick={() => setTipVisible(false)}
                 className="absolute right-2 top-2 text-muted-foreground hover:text-foreground"

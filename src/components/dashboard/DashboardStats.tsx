@@ -22,7 +22,7 @@ export function DashboardStats({ overdue, today, thisWeek, upcoming }: Props) {
         <button
           key={it.label}
           onClick={() => nav(it.href)}
-          className="rounded-lg border border-border bg-card p-4 text-left transition-colors hover:border-foreground/20"
+          className="glass rounded-[18px] p-4 text-left transition-transform hover:-translate-y-0.5"
         >
           <p className={cn('text-2xl font-semibold', it.tone)}>{it.value}</p>
           <p className="mt-1 text-xs uppercase tracking-wide text-muted-foreground">{it.label}</p>

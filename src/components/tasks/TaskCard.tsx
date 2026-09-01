@@ -20,8 +20,10 @@ export function TaskCard({ task, onClick, onComplete, onDelete, compact }: Props
   return (
     <div
       className={cn(
-        'group relative overflow-hidden rounded-lg border shadow-sm transition-all hover:shadow-md cursor-pointer',
-        PRIORITY_EVENT_STYLES[task.priority],
+        'group relative overflow-hidden rounded-[14px] transition-all cursor-pointer',
+        urgent
+          ? cn('border shadow-sm hover:shadow-md', PRIORITY_EVENT_STYLES[task.priority])
+          : 'glass hover:-translate-y-0.5',
         done && 'opacity-60',
         compact ? 'p-2.5' : 'p-3',
       )}

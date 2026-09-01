@@ -5,7 +5,7 @@ export function ProjectCard({ project }: { project: Project }) {
   return (
     <Link
       to={`/projects/${project.id}`}
-      className="block rounded-lg border border-border bg-card p-5 shadow-sm transition-all hover:border-foreground/20 hover:shadow-md"
+      className="glass block rounded-[20px] p-5 transition-transform hover:-translate-y-0.5"
     >
       <p className="text-sm font-semibold uppercase tracking-wide">{project.name}</p>
       {project.description && (
